@@ -16,7 +16,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        let window = UIWindow(windowScene: windowScene)
+//        let viewController = QuestionViewController(
+//            question: "Q1",
+//            options: ["A1", "A2"]
+//        ) {
+//            print($0)
+//        }
+
+        let viewController = ResultsViewController(
+            sumary: "You got 1/2 correct",
+            answers: [
+                PresentableAnswer(question: "Question 77", answer: "Yeah", wrongAnswer: nil),
+                PresentableAnswer(question: "Another question", answer: "Hell yeah", wrongAnswer: "Hell no!")
+            ]
+        )
+        _ = viewController.view
+        viewController.tableView.allowsMultipleSelection = true
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        self.window = window
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -50,3 +70,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+class ViewController: UIViewController {
+
+}

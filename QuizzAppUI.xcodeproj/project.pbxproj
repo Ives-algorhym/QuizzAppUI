@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		454737282ED290EC00F081B4 /* QuizApp_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 454737272ED290EC00F081B4 /* QuizApp_iOS.framework */; };
+		454737292ED290EC00F081B4 /* QuizApp_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 454737272ED290EC00F081B4 /* QuizApp_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		459AB23C2EB047DA007CBF91 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -23,10 +28,28 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		4547372A2ED290EC00F081B4 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				454737292ED290EC00F081B4 /* QuizApp_iOS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		4547371A2ED28AB600F081B4 /* QuizApp_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = QuizApp_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		454737232ED28FEB00F081B4 /* QuizApp_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = QuizApp_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		454737272ED290EC00F081B4 /* QuizApp_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = QuizApp_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		459AB2252EB047D8007CBF91 /* QuizzAppUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuizzAppUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		459AB23B2EB047DA007CBF91 /* QuizzAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuizzAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		459AB2452EB047DA007CBF91 /* QuizzAppUIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuizzAppUIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		45D66A6A2EBDB89100F26BB8 /* QuizApp */ = {isa = PBXFileReference; lastKnownFileType = text; path = QuizApp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -65,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				454737282ED290EC00F081B4 /* QuizApp_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,12 +109,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		456CA1B62EBDA9750023F5CE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				454737272ED290EC00F081B4 /* QuizApp_iOS.framework */,
+				454737232ED28FEB00F081B4 /* QuizApp_iOS.framework */,
+				4547371A2ED28AB600F081B4 /* QuizApp_iOS.framework */,
+				45D66A6A2EBDB89100F26BB8 /* QuizApp */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		459AB21C2EB047D8007CBF91 = {
 			isa = PBXGroup;
 			children = (
 				459AB2272EB047D8007CBF91 /* QuizzAppUI */,
 				459AB23E2EB047DA007CBF91 /* QuizzAppUITests */,
 				459AB2482EB047DA007CBF91 /* QuizzAppUIUITests */,
+				456CA1B62EBDA9750023F5CE /* Frameworks */,
 				459AB2262EB047D8007CBF91 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -115,6 +151,7 @@
 				459AB2212EB047D8007CBF91 /* Sources */,
 				459AB2222EB047D8007CBF91 /* Frameworks */,
 				459AB2232EB047D8007CBF91 /* Resources */,
+				4547372A2ED290EC00F081B4 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -294,9 +331,9 @@
 				INFOPLIST_FILE = QuizzAppUI/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -322,9 +359,9 @@
 				INFOPLIST_FILE = QuizzAppUI/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -465,7 +502,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BV8QQX5M8Y;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = algoives.QuizzAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -484,7 +521,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BV8QQX5M8Y;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = algoives.QuizzAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -502,6 +539,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BV8QQX5M8Y;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = algoives.QuizzAppUIUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -519,6 +557,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BV8QQX5M8Y;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = algoives.QuizzAppUIUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
