@@ -7,6 +7,7 @@
 
 import XCTest
 @testable import QuizzAppUI
+import QuizApp_iOS
 
 final class QuestionPresenterTests: XCTestCase {
     let question1 = Question.singleAnswer("A1")
