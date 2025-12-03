@@ -9,10 +9,6 @@ import Foundation
 import QuizApp_iOS
 import UIKit
 
-
-
-
-
 class NavigationControllerRouter: Router {
 
     private let navigationController: UINavigationController
@@ -30,11 +26,29 @@ class NavigationControllerRouter: Router {
         question: Question<String>,
         answerCallback: @escaping ([String]) -> Void
     ) {
-        let viewController =  factory.questionViewController(
-            for: question,
-            answerCallback: answerCallback
-        )
-        show(viewController)
+
+        switch question {
+        case .singleAnswer:
+            show(factory.questionViewController(
+                for: question,
+                answerCallback: answerCallback
+            ))
+        case .multipleAnswer:
+            let button = UIBarButtonItem(title: "Submit", style: .done, target: nil, action: nil)
+            let buttonController = SubmitButtonController(
+                button,
+                answerCallback
+            )
+            let controller = factory.questionViewController(
+                for: question,
+                answerCallback: {
+                    selection in buttonController.update(selection)
+                })
+
+            controller.navigationItem.rightBarButtonItem = button
+            show(controller)
+        }
+
     }
 
     func routeTo(result: Result<Question<String>, [String]>) {
@@ -47,4 +61,34 @@ class NavigationControllerRouter: Router {
     }
 }
 
+private class SubmitButtonController: NSObject {
+    let button: UIBarButtonItem
+    let callback: ([String]) -> Void
+    private var model: [String] = []
 
+    init(_ button: UIBarButtonItem, _ callback: @escaping ([String]) -> Void) {
+        self.button = button
+        self.callback = callback
+        super.init()
+        setup()
+    }
+
+    private func setup() {
+        button.target = self
+        button.action = #selector(fireCallback)
+        updateButtonState()
+    }
+
+    func update(_ model: [String]) {
+        self.model = model
+        updateButtonState()
+    }
+
+    private func updateButtonState() {
+        button.isEnabled = model.count > 0
+    }
+
+    @objc private func fireCallback() {
+        callback(model)
+    }
+}

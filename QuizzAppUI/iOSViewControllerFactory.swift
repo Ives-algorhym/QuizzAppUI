@@ -10,10 +10,14 @@ import QuizApp_iOS
 
 final class iOSViewControllerFactory: ViewControllerFactory {
 
+    private let questions: [Question<String>]
     private let options: Dictionary<Question<String>, [String]>
+    private let correctAnswers: Dictionary<Question<String>, [String]>
 
-    init(options: Dictionary<Question<String>, [String]>) {
+    init(questions: [Question<String>], options: Dictionary<Question<String>, [String]>, correctAnswers: Dictionary<Question<String>, [String]>) {
+        self.questions = questions
         self.options = options
+        self.correctAnswers = correctAnswers
     }
 
     func questionViewController(for question: Question<String>, answerCallback: @escaping ([String]) -> Void) -> UIViewController {
@@ -33,22 +37,56 @@ final class iOSViewControllerFactory: ViewControllerFactory {
 
         switch question {
         case .singleAnswer(let value):
-            return QuestionViewController(question: value,options: options, selection: answerCallback)
-        case .multipleAnswer(let value):
-            let controller = QuestionViewController(
-                question: value,
+            return questionViewController(
+                for: question,
+                value: value,
                 options: options,
-                selection: answerCallback
+                allowsMultipleSelection: false,
+                answerCallback: answerCallback
             )
-            _ = controller.view
-            controller.tableView.allowsMultipleSelection = true
+        case .multipleAnswer(let value):
+            return questionViewController(
+                for: question,
+                value: value,
+                options: options,
+                allowsMultipleSelection: true,
+                answerCallback: answerCallback
+            )
 
-            return controller
         }
 
     }
 
+    private func questionViewController(
+        for question: Question<String>,
+        value: String,
+        options: [String],
+        allowsMultipleSelection: Bool = false,
+        answerCallback: @escaping ([String]) -> Void
+    ) -> QuestionViewController {
+        let presenter = QuestionPresenter(
+            questions: questions,
+            question: question
+        )
+        let controller = QuestionViewController(
+            question:value,
+            options: options,
+            allowsMultipleSelection: allowsMultipleSelection,
+            selection: answerCallback
+        )
+        controller.title = presenter.title
+        return controller
+    }
+
     func resultsViewController(for result: QuizApp_iOS.Result<Question<String>, [String]>) -> UIViewController {
-        UIViewController()
+        let presenter = ResultPresenter(
+            result: result,
+            questions: questions,
+            correctAnswers: correctAnswers
+        )
+        return ResultsViewController(
+            sumary: presenter.summary,
+            answers: presenter.presentableAnswers
+        )
     }
 }

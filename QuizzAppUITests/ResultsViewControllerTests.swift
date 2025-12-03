@@ -11,7 +11,7 @@ import XCTest
 
 class ResultsViewControllerTests: XCTestCase {
     func test_viewDidload_renderSumary() {
-        XCTAssertEqual(makeSUT(sumary: "a sumary", answers: []).headerLabel.text, "a sumary")
+        XCTAssertEqual(makeSUT(sumary: "a summary", answers: []).headerLabel.text, "a summary")
     }
 
     func test_viewDidaload_renderAnswers() {

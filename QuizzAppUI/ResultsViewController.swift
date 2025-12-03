@@ -9,22 +9,22 @@ import Foundation
 import UIKit
 
 final class ResultsViewController: UIViewController, UITableViewDataSource {
-    private var sumary: String = ""
-    private var answers = [PresentableAnswer]()
+    private(set) var summary: String = ""
+    private(set) var answers = [PresentableAnswer]()
 
     var headerLabel: UILabel!
     var tableView: UITableView!
 
     convenience init(sumary: String, answers: [PresentableAnswer]) {
         self.init()
-        self.sumary = sumary
+        self.summary = sumary
         self.answers = answers
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         headerLabel = UILabel()
-        headerLabel.text = sumary
+        headerLabel.text = summary
 
         tableView = UITableView()
         tableView.dataSource = self
