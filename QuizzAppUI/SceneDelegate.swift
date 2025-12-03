@@ -6,37 +6,55 @@
 //
 
 import UIKit
+import QuizApp_iOS
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    var game: Game<Question<String>, [String], NavigationControllerRouter>?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        let question1 = Question.singleAnswer("What's Ives nationality")
+        let question2 = Question.multipleAnswer("What's Jorge nationality")
+        let questions = [question1, question2]
+
+        let option1 = "Canadian"
+        let option2 = "Colombian"
+        let option3 = "American"
+
+        let option4 = "Nigerian"
+        let option5 = "Spanish"
+        let option6 = "American"
+
+        let options1 = [option1, option2, option3]
+        let options2 = [option4, option5, option6]
+
+        let correctAnswers = [question1: [option3], question2: [option6]]
+
+        let navigationController = UINavigationController()
+        let factory = iOSViewControllerFactory(
+            questions: questions,
+            options: [question1: options1, question2: options2],
+            correctAnswers: correctAnswers
+        )
+        let router = NavigationControllerRouter(
+            navigationController,
+            factory: factory
+        )
+
+
+
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-//        let viewController = QuestionViewController(
-//            question: "Q1",
-//            options: ["A1", "A2"]
-//        ) {
-//            print($0)
-//        }
-
-        let viewController = ResultsViewController(
-            sumary: "You got 1/2 correct",
-            answers: [
-                PresentableAnswer(question: "Question 77", answer: "Yeah", wrongAnswer: nil),
-                PresentableAnswer(question: "Another question", answer: "Hell yeah", wrongAnswer: "Hell no!")
-            ]
-        )
-        _ = viewController.view
-        viewController.tableView.allowsMultipleSelection = true
-        window.rootViewController = viewController
+        window.rootViewController = navigationController
         window.makeKeyAndVisible()
         self.window = window
+
+        game = startGame(
+            questions: questions,
+            router: router,
+            correctAnswer: correctAnswers
+        )
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
